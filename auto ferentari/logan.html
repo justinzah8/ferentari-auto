@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Dacia Logan</title>
+<style>
+body{background:black;color:#00ff00;font-family:"Comic Sans MS";}
+.price{font-size:28px;color:red;border:3px dashed yellow;padding:10px;}
+
+.bmw-container {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  height: 260px;
+  margin-bottom: 10px;
+}
+.fire-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+  pointer-events: none;
+}
+.bmw-img {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+.info-box {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 340px;
+  background: rgba(20,20,20,0.95);
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  border-radius: 12px;
+  padding: 18px 20px;
+  font-size: 17px;
+  box-shadow: 0 0 18px #00ff0055;
+  z-index: 10;
+}
+@media (max-width: 900px) {
+  .info-box { position: static; width: 100%; margin-top: 20px; }
+}
+.buy-btn {
+  position: relative;
+  display: inline-block;
+  font-size: 28px;
+  font-family: 'Creepster', Paprika, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #ff0000 0%, #ff9900 100%);
+  border: 3px solid yellow;
+  border-radius: 16px;
+  padding: 18px 60px 18px 40px;
+  margin: 18px 0 10px 0;
+  cursor: pointer;
+  box-shadow: 0 0 18px #ff9900cc;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.1s;
+}
+.buy-btn:hover {
+  transform: scale(1.07) rotate(-2deg);
+  box-shadow: 0 0 32px #ff9900ee;
+}
+.btn-text {
+  position: relative;
+  z-index: 2;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #000, 0 0 18px #ff9900;
+}
+.btn-fire {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 60px;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: cover;
+}
+</style>
+</head>
+
+<body>
+<audio id="beepSound" src="beep.mp3"></audio>
+<audio autoplay loop src="engine.mp3"></audio>
+
+<h1>Dacia Logan – Fără Pretenții</h1>
+
+<div class="bmw-container" onclick="playEngineSound()">
+  <img src="fire.gif" class="fire-bg">
+  <img src="dacia_logan.png" class="bmw-img">
+</div>
+
+<ul>
+<li>1.4 benzină</li>
+<li>260.000 km</li>
+<li>ZGÂRIETURI BONUS</li>
+</ul>
+
+<div id="price" class="price" onmouseover="beep()">PREȚ: 1800 €</div>
+
+<button class="buy-btn" onclick="alert('Felicitări! Ai ales Loganul fără pretenții.')">
+  <span class="btn-text">CUMPĂRĂ ACUM</span>
+  <img src="fire.gif" class="btn-fire">
+</button>
+
+<a href="index.html">⬅ Înapoi</a>
+
+<div class="info-box">
+  <b>Despre Dacia Logan:</b><br><br>
+  Dacia Logan (2004-prezent) este simbolul simplității și al costurilor mici de întreținere. Robustă, ușor de reparat, perfectă pentru orice drum.<br><br>
+  <b>Motorizări:</b> Benzină și diesel, 1.2-1.6L.<br>
+  <b>Reputație:</b> Practică, ieftină, populară în România.<br>
+  <b>Dotări:</b> ABS, aer condiționat, servodirecție, airbaguri.<br><br>
+  <i>Loganul e mașina care te duce oriunde, fără fițe.</i>
+</div>
+
+<script>
+let basePrice=1800;
+let priceElement=document.getElementById("price");
+function updatePrice(){
+ let change=Math.floor(Math.random()*200-100);
+ priceElement.innerHTML="PREȚ: "+(basePrice+change)+" €";
+}
+function beep(){document.getElementById("beepSound").play();}
+setInterval(updatePrice,3000);
+
+function playEngineSound() {
+  var engineAudio = document.querySelector('audio[src="engine.mp3"]');
+  if(engineAudio) {
+    engineAudio.currentTime = 0;
+    engineAudio.play();
+  }
+}
+</script>
+</body>
+</html>

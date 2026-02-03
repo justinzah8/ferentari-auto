@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>VW Passat</title>
+<style>
+body{background:#111;color:#00ff00;font-family:"Comic Sans MS","Papyrus";}
+.price{font-size:30px;color:red;border:3px dashed yellow;padding:10px;animation:blink 1s infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+.bmw-container {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  height: 260px;
+  margin-bottom: 10px;
+}
+.fire-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+  pointer-events: none;
+}
+.bmw-img {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+.info-box {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 340px;
+  background: rgba(20,20,20,0.95);
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  border-radius: 12px;
+  padding: 18px 20px;
+  font-size: 17px;
+  box-shadow: 0 0 18px #00ff0055;
+  z-index: 10;
+}
+@media (max-width: 900px) {
+  .info-box { position: static; width: 100%; margin-top: 20px; }
+}
+.buy-btn {
+  position: relative;
+  display: inline-block;
+  font-size: 28px;
+  font-family: 'Creepster', Paprika, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #ff0000 0%, #ff9900 100%);
+  border: 3px solid yellow;
+  border-radius: 16px;
+  padding: 18px 60px 18px 40px;
+  margin: 18px 0 10px 0;
+  cursor: pointer;
+  box-shadow: 0 0 18px #ff9900cc;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.1s;
+}
+.buy-btn:hover {
+  transform: scale(1.07) rotate(-2deg);
+  box-shadow: 0 0 32px #ff9900ee;
+}
+.btn-text {
+  position: relative;
+  z-index: 2;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #000, 0 0 18px #ff9900;
+}
+.btn-fire {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 60px;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: cover;
+}
+</style>
+</head>
+
+<body>
+<audio id="beepSound" src="beep.mp3"></audio>
+<audio autoplay loop src="engine.mp3"></audio>
+
+<h1>VW Passat – Diesel Cinstit</h1>
+
+<div class="bmw-container" onclick="playEngineSound()">
+  <img src="fire.gif" class="fire-bg">
+  <img src="vw_passat.png" class="bmw-img">
+</div>
+
+<ul>
+<li>1.9 TDI legendar</li>
+<li>410.000 km (abia rodaj)</li>
+<li>Fum artistic la rece</li>
+</ul>
+
+<div id="price" class="price" onmouseover="beep()">PREȚ: 2500 €</div>
+
+<button class="buy-btn" onclick="alert('Felicitări! Ai ales dieselul etern.')">
+  <span class="btn-text">CUMPĂRĂ ACUM</span>
+  <img src="fire.gif" class="btn-fire">
+</button>
+
+<a href="index.html">⬅ Înapoi</a>
+
+<div class="info-box">
+  <b>Despre VW Passat:</b><br><br>
+  VW Passat B5 (1996-2005) este cunoscut pentru fiabilitatea motorului 1.9 TDI, confort și spațiu generos. Ideal pentru drumuri lungi și kilometri mulți.<br><br>
+  <b>Motorizări:</b> Diesel și benzină, 1.6-2.8L.<br>
+  <b>Reputație:</b> Rezistent, economic, preferat de navetiști.<br>
+  <b>Dotări:</b> ABS, climatizare, scaune încălzite (opțional), ESP.<br><br>
+  <i>Passat-ul e alegerea celor care vor să ajungă mereu la destinație.</i>
+</div>
+
+<script>
+let basePrice=2500;
+let priceElement=document.getElementById("price");
+function updatePrice(){
+ let change=Math.floor(Math.random()*200-100);
+ let p=basePrice+change;
+ priceElement.innerHTML="PREȚ: "+p+" €";
+ priceElement.style.color=change>0?"red":"lime";
+}
+function beep(){document.getElementById("beepSound").play();}
+setInterval(updatePrice,3000);
+
+function playEngineSound() {
+  var engineAudio = document.querySelector('audio[src="engine.mp3"]');
+  if(engineAudio) {
+    engineAudio.currentTime = 0;
+    engineAudio.play();
+  }
+}
+</script>
+</body>
+</html>
